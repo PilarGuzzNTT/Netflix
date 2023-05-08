@@ -77,7 +77,6 @@ public class WebSecurityManager {
 				.exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
 				.authorizeHttpRequests((requests) -> {
 					requests.mvcMatchers(HttpMethod.GET, "/actors/**").hasAnyAuthority("USER_ROLE", "ADMIN_ROLE")
-							.mvcMatchers(HttpMethod.GET, "/tv-show/{id}/awards").hasAnyAuthority("USER_ROLE", "ADMIN_ROLE")
 							.mvcMatchers(HttpMethod.POST, "/actors/**").hasAuthority("ADMIN_ROLE")
 							.mvcMatchers(HttpMethod.PATCH, "/actors/**").hasAuthority("ADMIN_ROLE")
 							.mvcMatchers(HttpMethod.PUT, "/actors/**").hasAuthority("ADMIN_ROLE")
@@ -85,7 +84,14 @@ public class WebSecurityManager {
 							.antMatchers("/categories/**").hasAuthority("ADMIN_ROLE")
 							.antMatchers(RestConstants.RESOURCE_CHAPTER + "/**").hasAuthority("ADMIN_ROLE")
 							.antMatchers(RestConstants.RESOURCE_SEASON + "/**").hasAuthority("ADMIN_ROLE")
-							.antMatchers("/tv-shows/**").hasAuthority("ADMIN_ROLE")
+							
+							//.mvcMatchers(HttpMethod.GET, "/tv-show/{id}/awards").hasAnyAuthority("USER_ROLE", "ADMIN_ROLE")
+							//.antMatchers("/tv-shows/**").hasAuthority("ADMIN_ROLE")
+							.mvcMatchers(HttpMethod.GET, "/tv-shows/**").hasAnyAuthority("USER_ROLE", "ADMIN_ROLE")
+							.mvcMatchers(HttpMethod.POST, "/tv-shows/**").hasAuthority("ADMIN_ROLE")
+							.mvcMatchers(HttpMethod.PATCH,"/tv-shows/**").hasAuthority("ADMIN_ROLE")
+							.mvcMatchers(HttpMethod.PUT, "/tv-shows/**").hasAuthority("ADMIN_ROLE")
+							.mvcMatchers(HttpMethod.DELETE, "/tv-shows/**").hasAuthority("ADMIN_ROLE")
 
 							.antMatchers("/login").permitAll()
 							.antMatchers("/registrer").permitAll()
